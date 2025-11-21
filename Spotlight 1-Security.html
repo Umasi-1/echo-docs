@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Echo API Security & Privacy Architecture</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 30px;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .brand {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .footer {
+            margin-top: 50px;
+            font-size: 0.8em;
+            text-align: center;
+            color: #95a5a6;
+            border-top: 1px solid #ecf0f1;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="brand">Echo API</div>
+        <h1>Security & Privacy Architecture</h1>
+    </div>
+
+    <h2>Overview</h2>
+    <p>Echo API is built with a "Security First" approach, ensuring that user data remains private, isolated, and secure at every stage of the lifecycle. This document outlines the technical measures we employ to protect your data.</p>
+
+    <h2>1. Multi-Tenant Isolation</h2>
+    <p>Echo API utilizes strict multi-tenancy enforcement to ensure no data leakage between users.</p>
+    <ul>
+        <li><strong>Tenant Identification:</strong> Every API request is authenticated via the RapidAPI Gateway, which assigns a unique, immutable User ID to the request.</li>
+        <li><strong>Data Partitioning:</strong> Customer data is stored in isolated document collections within our Firestore database.</li>
+        <li><strong>Access Control:</strong> Our backend strictly validates that the requesting User ID matches the Data Owner ID for every read and write operation. It is mathematically impossible for User A to access User B's logs.</li>
+    </ul>
+
+    <h2>2. Encryption Standards</h2>
+    <ul>
+        <li><strong>In-Transit:</strong> All data transmitted between your application, the RapidAPI Gateway, and our servers is encrypted using TLS 1.2+ (Transport Layer Security).</li>
+        <li><strong>At-Rest:</strong> All data stored in our databases is encrypted at rest using AES-256 standards managed by Google Cloud Platform.</li>
+    </ul>
+
+    <h2>3. AI Data Privacy</h2>
+    <ul>
+        <li><strong>Processing:</strong> Data sent to our AI engine is used strictly for processing the request (summarization and tagging).</li>
+        <li><strong>No Training:</strong> We do not use your customer data to train our public AI models. Your user's journal entries remain their own.</li>
+    </ul>
+
+    <h2>4. Infrastructure Security</h2>
+    <p>Our backend is hosted on Render's secure cloud infrastructure, which provides:</p>
+    <ul>
+        <li>DDoS Protection</li>
+        <li>Automated OS Patching</li>
+        <li>Private Networking between services</li>
+    </ul>
+
+    <div class="footer">
+        &copy; 2024 Echo API. All rights reserved.
+    </div>
+
+</body>
+</html>
